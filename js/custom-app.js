@@ -1,12 +1,10 @@
 // init
 $("#loader").modal('show');
 var app = new app();
+
 /*
  * Data Handling Functions
  */
-app.onGetData = function (data) {
-    data = app.dataCheck(data);
-};
 app.onGetPasswordResetData = function (data) {
     console.log(data);
     app.showVerifyPasswordResetMessage('show');
@@ -21,7 +19,7 @@ app.onGetLoginData = function (data) {
         app.showVerifyEmailMessage('show');
     }else{
         console.log(data);
-        User.saveSession(data.BasicPage);
+        Session.save(data.BasicPage);
         $("#lr_load").hide();
         $("#loginEmail").val('');
         $("#loginPassword").val('');
@@ -56,7 +54,7 @@ app.dataCheck = function(data){
  * UI Handling Functions
  */
 app.showUserProfile = function() {
-    var data = User.getSession();
+    var data = Session.get();
     $('.nav .logged-in').show();
     $('.nav .logged-out').hide();
     $("#user-id").html(data.uniqueApiId);
@@ -85,7 +83,7 @@ app.initGui = function () {
         $("#loginRegister").modal('show');
         $('#loginRegister a[href="#registerFormTab"]').tab('show');
     });
-    if(!User.getSession()){
+    if(!Session.get()){
         $('.nav .logged-out').show();
         $("#loader").modal('hide');
     }else{
@@ -98,7 +96,7 @@ app.initGui = function () {
  * UI Event Handlers
  */
 app.resetUserPassword = function(evt) {
-    var data = User.getSession();
+    var data = Session.get();
     if(data){
         var email = data.title;
         app.nimble.get(
@@ -116,7 +114,7 @@ app.logoutUser = function() {
     app.clearAllUserData();
 };
 app.clearAllUserData = function () {
-    User.clearSession();
+    Session.clear();
     $("#user-id").html("");
     $("#user-name").html("");
     $("#user-email").html("");
