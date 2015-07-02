@@ -1,0 +1,21 @@
+.panel {
+     width:80%;
+    margin:0 auto;
+    margin-top:20px;
+}
+#user-data .container-fluid {
+     margin:10px;
+}
+
+#profilePage {
+     display:none;
+}
+.modal-content {
+     box-shadow:none;
+}
+#loader .modal-body {
+    text-align:center;
+}
+nav .logged-in, nav .logged-out {
+     display:none;
+}
